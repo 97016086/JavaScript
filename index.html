@@ -47,9 +47,9 @@
     }
     if (userClick2 !=0){
         if(userClick1 === userClick2){
-            alert('Goed Zo...');
+            document.getElementById('memory').innerHTML='Goed Zo...';
         }else{
-            alert('Fout');
+            document.getElementById('memory').innerHTML='Fout...';
             document.getElementById(userSelectedCard1).
             disabled = false;
             document.getElementById(userSelectedCard2).
@@ -67,6 +67,7 @@
 <body>
 
     <div class="memoryContainer">
+        <div class="memory"></div>
         <h1>Memory</h1>
         <input type="button" value="" id="kaart1" 
         class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
@@ -77,5 +78,6 @@
         <input type="button" value="" id="kaart4"
         class="memoryCard" onclick="checkClickedCard(2, 'kaart4');" />
     </div>
+        </div>
 </body>
 </html>
