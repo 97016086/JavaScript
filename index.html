@@ -32,30 +32,40 @@
     var userClick2 = 0;
     var userSelectedCard1 = "";
     var userSelectedCard2 = "";
+    var userSelectedCard1="";
+    var nummerCliks=0;
+    var kaart1 ="foto/"
+
     function checkClickedCard(cardNum, cardId){
         document.getElementById(cardId).disabled = true;
         document.getElementById(cardid).value = cardNum;
-        document.getElementById(cardId).style = "background: url(myimage.png)";
+        document.getElementById(cardId).style = "background: url(pxfuel.)";
+        document.getElementById(cardNum).src ='foto/' + cardId + '.jpg';
 
-    if (userClick1==0){
+    if (userClick1 == 0){
+        userClick1=1;
         userClick1 = cardNum;
         userSelectedCard1 = cardId;
+        numerCliks +=1;
+        document.getElementById("clicks").innerHTML="aantal kliks:" + kliks;
+        
     }else{
         userClick2 = cardNum;
         userSelectedCard2 =cardId;
 
     }
     if (userClick2 !=0){
-        if(userClick1 === userClick2){
+        if(userClick1 == userClick2){
             document.getElementById('memory').innerHTML='Goed Zo...';
         }else{
-            document.getElementById('memory').innerHTML='Fout...';
+            document.getElementById('memory').innerHTML = 'Fout...';
+            document.getElementById('kaart1').src = "foto/pxfuel.com.jpg"
+            document.getElementById(userSelectedCard2).src = "";
             document.getElementById(userSelectedCard1).
             disabled = false;
             document.getElementById(userSelectedCard2).
             disabled = false;
-            document.getElementById(userSelectedCard1).value = "";
-            document.getElementById(userSelectedCard2).value = "";
+           
         }
         userClick1 = 0;
         userClick2 = 0;
@@ -69,13 +79,13 @@
     <div class="memoryContainer">
         <div class="memory"></div>
         <h1>Memory</h1>
-        <input type="button" value="" id="kaart1" 
+        <input type="button" value="" id="kaart1" src="foto/pxfuel.com.jpg"
         class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
-        <input type="button" value="" id="kaart2"
+        <input type="button" value="" id="kaart2" src="foto/pxfuel.com (3).jpg"
         class="memoryCard" onclick="checkClickedCard(2, 'kaart2');" />
-        <input type="button" value="" id="kaart3"
+        <input type="button" value="" id="kaart3" src="foto/pxfuel.com.jpg "
         class="memoryCard" onclick="checkClickedCard(1, 'kaart3');" />
-        <input type="button" value="" id="kaart4"
+        <input type="button" value="" id="kaart4" src="foto/pxfuel.com (3).jpg"
         class="memoryCard" onclick="checkClickedCard(2, 'kaart4');" />
     </div>
         </div>
