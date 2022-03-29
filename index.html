@@ -23,7 +23,7 @@
     .memoryCard {
         width: 100px;
         height: 100px;
-        background-image:url('foto/annie-spratt-zA7I5BtFbvw-unsplash.jpg');
+        background-image:url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg');
         background-size:cover;
         margin:10px;
         border: 1px solid #999999;
@@ -31,10 +31,10 @@
         font-weight: bold;
         color:white;
         float:left;
+       
 
     }
-   
- 
+
 </style>
 <script>
     var userClick1 = 0;
@@ -54,8 +54,8 @@
     if (userClick1==0){
         userClick1 = cardNum;
         userSelectedCard1 = cardId;
-        //numerCliks +=1;
-        //document.getElementById("clicks").innerHTML="aantal kliks:" + kliks;
+        numerCliks +=1;
+        document.getElementById("clicks").innerHTML="aantal kliks:" + kliks;
         
     }else{
         userClick2 = cardNum;
@@ -64,21 +64,29 @@
     }
     if (userClick2!=0){
         if(userClick1==userClick2){
-            document.getElementsByClassName('memory').innerHTML='Goed Zo...';
+            alert('Goed zo');
+            //document.getElementsByClassName('memory').innerHTML='Goed Zo...';
         }else{
-            document.getElementsByClassName('memory').innerHTML ='Fout...';
+            timeout = setTimeout(fout, 2000);
 
-        
-            document.getElementById(userSelectedCard1).disabled = false;
-            document.getElementById(userSelectedCard2).disabled = false;
-            document.getElementById(userSelectedCard1).value = "";
-            document.getElementById(userSelectedCard2).value = "";
+            //document.getElementsByClassName('memory').innerHTML ='Fout...';
+
+           
+            //document.getElementById(userSelectedCard1).value = "";
+            //document.getElementById(userSelectedCard2).value = "";
         }
+        
         userClick1 = 0;
         userClick2 = 0;
     }
  }
-
+ function fout() {
+     
+        document.getElementById(userSelectedCard1).disabled = false;
+        document.getElementById(userSelectedCard2).disabled = false;
+        document.getElementById(userSelectedCard1).style = "background: url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
+        document.getElementById(userSelectedCard2).style = "background: url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
+ }
 
 
 
@@ -92,7 +100,7 @@
         <h1>Memory</h1>
         <div class="memory">
                 
-                <input type="button" value="" id="kaart1" src="foto/adrian-infernus-GLf7bAwCdYg-unsplash.jpg"
+                <input type="button" value="" id="kaart1" 
                  class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
                 <input type="button" value="" id="kaart2" 
                 class="memoryCard" onclick="checkClickedCard(2, 'kaart2');" />
