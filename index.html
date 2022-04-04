@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<script type="text/javascript" src="confetti.js"</script></script>
 <title>Simple Memory</title>
 <style>
     h1 {
@@ -11,14 +12,33 @@
     }
     .memoryContainer {
         width: 480px;
-        height: 325px;
+        height: 360px;
         border: 1px solid #E9E9E9;
         margin: auto;
         background-color: rgb(179, 175, 175);
        
         
     }
-   
+   .reset {
+       margin: auto;
+       text-align:center;
+       width: 35%;
+       color:white;
+       background-color:grey;
+       border-color:darkgray;
+       border-width: 1px;
+       border-style: none;
+       border-radius: 5px;
+    
+   }
+
+   .reset:hover {
+       background-color:dimgray;
+   }
+
+   .reset:active {
+       background-color:#818181;
+   }
   
     .memoryCard {
         width: 100px;
@@ -34,6 +54,9 @@
        
 
     }
+    #kliks {
+        margin:10px;
+    }
 
 </style>
 <script>
@@ -42,6 +65,13 @@
     var userSelectedCard1 = "";
     var userSelectedCard2 = "";
     var nummerCliks=0;
+    var points = 0;
+    var sound = new Audio('Card-flip-sound-effect.mp3');
+    var faultsound = new Audio('negative_beeps-6008.mp3');
+    var correctsound = new Audio('Win sound.wav');
+    var victorysound = new Audio('221951__sonsdebarcelona__suspense-ending-in-cheers.wav');
+
+
 
 
     function checkClickedCard(cardNum, cardId){
@@ -52,21 +82,39 @@
         document.getElementById(cardId).style.backgroundPosition = "15% 100%";
 
     if (userClick1==0){
+        userClick1 = 1;
         userClick1 = cardNum;
         userSelectedCard1 = cardId;
-        numerCliks +=1;
-        document.getElementById("clicks").innerHTML="aantal kliks:" + kliks;
+        nummerCliks +=1;
+        document.getElementById("kliks").innerHTML="aantal keer geklikt:" + nummerCliks;
+        sound.play();
+        
+        
         
     }else{
         userClick2 = cardNum;
         userSelectedCard2 = cardId;
-
+        nummerCliks +=1;
+        document.getElementById("kliks").innerHTML="aantal keer geklikt:" + nummerCliks;
+        sound.play();
+        //faultsound.play();
     }
     if (userClick2!=0){
         if(userClick1==userClick2){
-            alert('Goed zo');
+            correctsound.play();
+            points +=1;
+
+            if(points==4) {
+                victorysound.play();
+                  
+                
+            }
+
+           
+
             //document.getElementsByClassName('memory').innerHTML='Goed Zo...';
         }else{
+            faultsound.play();
             timeout = setTimeout(fout, 2000);
 
             //document.getElementsByClassName('memory').innerHTML ='Fout...';
@@ -80,16 +128,56 @@
         userClick2 = 0;
     }
  }
+
  function fout() {
      
         document.getElementById(userSelectedCard1).disabled = false;
         document.getElementById(userSelectedCard2).disabled = false;
         document.getElementById(userSelectedCard1).style = "background: url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
         document.getElementById(userSelectedCard2).style = "background: url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
+        document.getElementById(userSelectedCard1).style.backgroundSize = "cover";
+        document.getElementById(userSelectedCard2).style.backgroundSize = "cover";
  }
 
 
 
+function shuffleCards() {
+    var numbers = new Array();
+    var htmlDivStr = '';
+    var teller = 0;
+    
+    while (teller < numberOfCards) {
+        var randomNumber = (Math.random() * (numberOfCards / 2)) + 1;
+        randomNumber = Math.floor(randomNumber);
+        if(numbers[randomNumber] != 2) {
+            if(numbers[randomNumber] == 1) {
+                numbers[randomNumber] = '2';
+            }else{
+                numbers[randomNumber] = '1';
+            }
+            htmlDivStr = htmlDivStr +'<input type="button" value="'+ randomNumber + '" id="kaart' + teller + '" class="memoryCard" onclick="checkClickedCard(' + randomNumber + ', \'kaart' 
+            + teller + '\');" />';
+            teller++;
+        }
+    }
+    document.getElementById("memoryCards").innerHTML = htmlDivStr;
+}
+
+function reset () {
+    userClick1 = 0;
+    userClick2 = 0;
+    userSelectedCard1 = 0;
+    userSelectedCard2 = 0;
+    nummerCliks = 0;
+    points = 0; 
+
+    document.getElementById("kliks").innerHTML = "aantal keer geklikt:" + nummerCliks;
+    document.getElementById("reset").style = "background: url(foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
+   
+    for(let i = 1; i <= 8; ) {
+        
+    }
+}
  
 </script>
 </head>
@@ -98,6 +186,7 @@
 
     <div class="memoryContainer">
         <h1>Memory</h1>
+        <p id="kliks">aantal keer geklikt:</p>
         <div class="memory">
                 
                 <input type="button" value="" id="kaart1" 
@@ -122,6 +211,8 @@
                 class="memoryCard" onclick="checkClickedCard(3,'kaart7');" />
                 <input type="button" value="" id="kaart8" 
                 class="memoryCard" onclick="checkClickedCard(4,'kaart8');" />
+                <input type="button" value="nog een keer spelen" id="button" 
+                class="reset" onclick="reset">
                 
     </div>
         </div>
