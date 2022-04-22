@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script type="text/javascript" src="confetti.js"</script></script>
 <title>Simple Memory</title>
 <style>
     h1 {
@@ -20,7 +19,7 @@
         
     }
    .reset {
-       margin: auto;
+       margin-left: 132px;
        text-align:center;
        width: 35%;
        color:white;
@@ -64,8 +63,9 @@
     var userClick2 = 0;
     var userSelectedCard1 = "";
     var userSelectedCard2 = "";
-    var nummerCliks=0;
+    var nummerCliks = 0;
     var points = 0;
+
     var sound = new Audio('Card-flip-sound-effect.mp3');
     var faultsound = new Audio('negative_beeps-6008.mp3');
     var correctsound = new Audio('Win sound.wav');
@@ -103,13 +103,16 @@
         if(userClick1==userClick2){
             correctsound.play();
             points +=1;
-
+        
+    
             if(points==4) {
                 victorysound.play();
+                
                   
                 
             }
 
+          
            
 
             //document.getElementsByClassName('memory').innerHTML='Goed Zo...';
@@ -123,9 +126,9 @@
             //document.getElementById(userSelectedCard1).value = "";
             //document.getElementById(userSelectedCard2).value = "";
         }
-        
         userClick1 = 0;
         userClick2 = 0;
+       
     }
  }
 
@@ -139,14 +142,31 @@
         document.getElementById(userSelectedCard2).style.backgroundSize = "cover";
  }
 
-
+function reset() {
+   userClick1 = 0;
+   userClick2 = 0;
+   nummerCliks = 0;
+   userSelectedCard1 = "";
+   userSelectedCard2 = "";
+   points = 0;
+   document.getElementById("kliks").innerHTML="aantal keer geklikt:";
+    for(let i=1; i < 9; i++){
+        document.getElementById("kaart" +i).disabled = false;
+        document.getElementById("kaart" +i).style = "background: url('foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
+        document.getElementById("kaart" +i).style.backgroundSize = "cover";
+    }
+   
+ shuffleCards();
+}
 
 function shuffleCards() {
     var numbers = new Array();
     var htmlDivStr = '';
     var teller = 0;
+    var numberOfCards = 8;
+
     
-    while (teller < numberOfCards) {
+    while (teller <  numberOfCards) {
         var randomNumber = (Math.random() * (numberOfCards / 2)) + 1;
         randomNumber = Math.floor(randomNumber);
         if(numbers[randomNumber] != 2) {
@@ -155,28 +175,14 @@ function shuffleCards() {
             }else{
                 numbers[randomNumber] = '1';
             }
-            htmlDivStr = htmlDivStr +'<input type="button" value="'+ randomNumber + '" id="kaart' + teller + '" class="memoryCard" onclick="checkClickedCard(' + randomNumber + ', \'kaart' 
-            + teller + '\');" />';
+            kaartnummer = teller + 1;
+            htmlDivStr = htmlDivStr + '<input type="button" value=""'+ randomNumber + '" id="kaart' + kaartnummer + '" class="memoryCard" onclick="checkClickedCard('+ randomNumber + ',\'kaart' + kaartnummer + '\');" />';
             teller++;
         }
     }
-    document.getElementById("memoryCards").innerHTML = htmlDivStr;
-}
+   document.getElementById("memory").innerHTML = htmlDivStr;
 
-function reset () {
-    userClick1 = 0;
-    userClick2 = 0;
-    userSelectedCard1 = 0;
-    userSelectedCard2 = 0;
-    nummerCliks = 0;
-    points = 0; 
-
-    document.getElementById("kliks").innerHTML = "aantal keer geklikt:" + nummerCliks;
-    document.getElementById("reset").style = "background: url(foto/pawel-czerwinski-dgJT71cXlC4-unsplash.jpg')";
-   
-    for(let i = 1; i <= 8; ) {
-        
-    }
+    
 }
  
 </script>
@@ -187,34 +193,26 @@ function reset () {
     <div class="memoryContainer">
         <h1>Memory</h1>
         <p id="kliks">aantal keer geklikt:</p>
-        <div class="memory">
-                
-                <input type="button" value="" id="kaart1" 
-                 class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
-                <input type="button" value="" id="kaart2" 
-                class="memoryCard" onclick="checkClickedCard(2, 'kaart2');" />
-                
-
-                
-                <input type="button" value="" id="kaart3" 
-                class="memoryCard" onclick="checkClickedCard(1, 'kaart3');" />
-                <input type="button" value="" id="kaart4" 
-                class="memoryCard" onclick="checkClickedCard(2, 'kaart4');" />
-               
-                
-                <input type="button" value="" id="kaart5" 
-                class="memoryCard" onclick="checkClickedCard(3,'kaart5');" />
-                <input type="button" value="" id="kaart6"
-                class="memoryCard" onclick="checkClickedCard(4,'kaart6');" />
-                
-                <input type="button" value="" id="kaart7" 
-                class="memoryCard" onclick="checkClickedCard(3,'kaart7');" />
-                <input type="button" value="" id="kaart8" 
-                class="memoryCard" onclick="checkClickedCard(4,'kaart8');" />
-                <input type="button" value="nog een keer spelen" id="button" 
-                class="reset" onclick="reset">
-                
+        <div id="memory">
+              
+                    <input type="button" value="" id="kaart1" 
+                    class="memoryCard" onclick="checkClickedCard(1, 'kaart1');" />
+                    <input type="button" value="" id="kaart2" 
+                    class="memoryCard" onclick="checkClickedCard(2, 'kaart2');" />
+                    <input type="button" value="" id="kaart3" 
+                    class="memoryCard" onclick="checkClickedCard(1, 'kaart3');" />
+                    <input type="button" value="" id="kaart4" 
+                    class="memoryCard" onclick="checkClickedCard(2, 'kaart4');" />
+                    <input type="button" value="" id="kaart5" 
+                    class="memoryCard" onclick="checkClickedCard(3,'kaart5');" />
+                    <input type="button" value="" id="kaart6"
+                    class="memoryCard" onclick="checkClickedCard(4,'kaart6');" />
+                    <input type="button" value="" id="kaart7" 
+                    class="memoryCard" onclick="checkClickedCard(3,'kaart7');" />
+                    <input type="button" value="" id="kaart8" 
+                    class="memoryCard" onclick="checkClickedCard(4,'kaart8');" />      
     </div>
+                <input type="button" class="reset" value="reset"  onclick="reset();" />
         </div>
 </body>
 </html>
