@@ -28,7 +28,6 @@ possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click
     uiteindelijkeWinnaar();
 
     ronde.innerHTML = round;
-    reset();
 }));
 
 function generateComputerChoice() {
@@ -50,8 +49,7 @@ function getResult() {
 
 
     if (computerChoice === userChoice){
-        result = 'Het is een Gelijkspel';
-        
+        result = 'Het is een Gelijkspel';  
     }
 
     if(computerChoice =='steen' && userChoice == 'papier'){
@@ -109,13 +107,12 @@ function uiteindelijkeWinnaar() {
 }
 
 function reset() {
-    if(round === 5){
-    round = 0;
-    gebruikerpunten = 0;
-    computerpunten = 0;
-   
-    winner = "";
-
     
-    }
+    document.getElementById('winner').innerHTML = "";
+    document.getElementById('result').innerHTML = "";
+    document.getElementById('ronde').innerHTML = "";
+    document.getElementById('computer-points').innerHTML = 0;
+    document.getElementById('user-points').innerHTML = 0;
+    document.getElementById('user-choice').innerHTML = "";
+    document.getElementById('computer-choice').innerHTML = "";
 }
